@@ -1,0 +1,58 @@
+version: "2.0"
+
+rules:
+
+- rule: Say goodbye anytime the user says goodbye
+  steps:
+  - intent: goodbye
+  - action: utter_goodbye
+
+- rule: Say 'I am a bot' anytime the user challenges
+  steps:
+  - intent: bot_challenge
+  - action: utter_iamabot
+
+- rule: Say weather forecast
+  steps:
+  - intent: ask_weather
+  - action: action_weather
+
+- rule: activar cita
+  steps:
+  - intent: info_cita
+  - action: cita_form
+  - active_loop: cita_form
+
+- rule: submit info cita
+  condition:
+  - active_loop: cita_form
+  steps:
+  - action: cita_form
+  - active_loop: null
+  - action: utter_submit
+  - action: utter_cita_slot
+
+- rule: interruption in info cita
+  condition:
+  - active_loop: cita_form
+  steps:
+  - intent: bot_challenge
+  - action: utter_iamabot
+  # volvemos al formulario después de responder la pregunta anterior
+  - action: cita_form
+  - active_loop: cita_form
+
+- rule: activar horario
+  steps:
+  - intent: ask_horario
+  - action: horario_form
+  - active_loop: horario_form
+
+- rule: submit info horario
+  condition:
+  - active_loop: horario_form
+  steps:
+  - action: horario_form
+  - active_loop: null
+  - action: utter_horario_submit
+
