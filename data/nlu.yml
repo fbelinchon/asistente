@@ -1,0 +1,152 @@
+version: "2.0"
+nlu:
+- intent: info_cita
+  examples: |
+    - ¿Que horario teneis libre en [Arganda](estacion)?
+    - ¿que horario teneis libre en [Arganda](estacion) para mañana?
+    - ¿que disponibilidad hay para [mañana](time)]?
+    - ¿que disponibilidad hay para [mañana](time) en la ITV de [Coslada](estacion)?
+    - Cita para pasar la ITV en [Móstoles](estacion)
+    - Cita para el [martes de la próxima semana](time) en [Villarejo](estacion)
+    - ¿que horario teneis libre?
+    - Cita para pasar la ITV
+    - ¿que día teneis libre para pasar la ITV?
+    - Información para pasar la ITV
+    - quiero cita para pasar la ITV
+    - [de mañana](turno)
+    - [de tarde](turno)
+    - [mañana](turno)
+    - [tarde](turno)
+    - a las [13:00](time)
+    - sobre las [15:00](time)
+    - a las [14:00](time)
+    - sobre las [14:00](time)
+    - que horario teneis en [Coslada](estacion)?
+    - el viernes por la [tarde](turno)
+    - que teneis libre el lunes [de](time) la [próxima semana](time) en [Coslada](estacion)?
+    - quiero pedir una cita
+    - [mañana](turno)
+- intent: greet
+  examples: |
+    - Hola
+    - hello
+    - hi
+    - buenas tardes
+    - hola
+    - ¿Cómo lo llevas?
+    - ¿Qué pasa tío?
+    - ¿Qué tal?
+    - ¿Cómo te va?
+    - Buenos días
+- intent: goodbye
+  examples: |
+    - adios
+    - hasta luego
+    - que tengas un buen dia
+    - nos vemos
+    - bye
+    - me piro
+    - me voy
+    - me largo
+    - Hasta mañana
+- intent: affirm
+  examples: |
+    - por supuesto
+    - de acuerdo
+    - correcto
+    - suena bien
+    - perfecto
+    - totalmente deacuerdo
+    - sí
+    - claro que sí
+    - porqué no.
+    - sí claro.
+    - si, estoy seguro.
+- intent: deny
+  examples: |
+    - no
+    - n
+    - nunca
+    - no lo creo
+    - no estoy deacuerdo
+    - de ninguna manera
+    - de eso nada
+    - nunca jamás
+    - ni de coña
+    - jamás
+    - paso
+- intent: mood_great
+  examples: |
+    - bien
+    - asombroso
+    - estupendo
+    - maravilloso
+    - me siento muy bien
+    - estupendamente
+    - estoy a tope
+    - muy bien
+    - genial
+- intent: mood_unhappy
+  examples: |
+    - no me siento bien
+    - estoy hasta los huevos
+    - estoy triste
+    - triste
+    - hasta los huevos
+    - harto
+    - muy harto
+    - estoy muy harto
+    - no muy bien
+    - estoy destrozado
+    - hecho polvo
+    - un día de mierda
+    - mi día fue horroroso
+- intent: ask_weather
+  examples: |
+    - dime el tiempo
+    - dime el tiempo en [Madrid](LOC)
+    - dime el tiempo en [Roma](LOC)
+    - que tiempo hace
+    - que tiempo hace en [Madrid](LOC)
+    - que tiempo hace en [Roma](LOC)
+    - que tiempo hace en [Sevilla](LOC)
+    - ¿Qué temperatura hace en Moscú?
+    - ¿Qué temperatura hace en París?
+    - ¿Qué tiempo hace en Córdoba?
+    - dime el tiempo en Moscú
+    - ¿Cómo está el tiempo en Londrés?
+    - ¿Qué temperatura hace en Londres?
+    - ¿Cómo está el tiempo?
+    - ¿Qué temperatura hace?
+- intent: bot_challenge
+  examples: |
+    - ¿Estoy hablando con un robot?
+    - ¿Eres un humano?
+    - ¿Eres un robot?
+- intent: stop
+  examples: |
+    - he cambiado de idea
+    - no es esto lo que quiero
+    - no quiero información de la cita
+    - esto no me ayuda.
+    - no es lo que quiero
+- intent: ask_horario
+  examples: |
+    - que horario tiene [Coslada](estacion)
+    - ¿cual es el horario de [Villarejo](estacion)?
+    - ¿cual es el horario de apertura?
+    - ¿a que hora abre?
+    - ¿a que hora cierra?
+    - ¿a que hora cierra Móstoles?
+    - quiero informacion de [coslada](estacion)
+    - quiero informacion de [Villarejo](estacion)
+    - a que hora abre [Mostoles](estacion)
+- lookup: estacion
+  examples: |
+    - Coslada
+    - Móstoles
+    - Mostoles
+    - Villarejo
+    - Alcalá
+    - Alcala
+    - Aranjuez

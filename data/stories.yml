@@ -1,0 +1,235 @@
+version: "2.0"
+stories:
+- story: happy path
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_great
+  - action: utter_happy
+- story: sad path 1
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_unhappy
+  - action: utter_cheer_up
+  - action: utter_did_that_help
+  - intent: affirm
+  - action: utter_happy
+- story: sad path 2
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_unhappy
+  - action: utter_cheer_up
+  - action: utter_did_that_help
+  - intent: deny
+  - action: utter_goodbye
+- story: interactive_story_1
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: ask_weather
+  - action: action_weather
+  - intent: ask_weather
+    entities:
+    - LOC: Córdoba
+  - action: action_weather
+  - intent: ask_weather
+    entities:
+    - LOC: Madrid
+  - action: action_weather
+  - intent: ask_weather
+    entities:
+    - LOC: Roma
+  - action: action_weather
+  - intent: ask_weather
+    entities:
+    - LOC: París
+  - action: action_weather
+  - intent: ask_weather
+    entities:
+    - LOC: Moscú
+  - action: action_weather
+  - intent: ask_weather
+    entities:
+    - LOC: Sevilla
+  - action: action_weather
+
+# - story: info_cita_happypath
+#   steps:
+#     - intent: greet
+#     - action: utter_greet
+#     - intent: info_cita
+#     - action: cita_form
+
+
+- story: interactive_story_1
+  steps:
+  - intent: info_cita
+    entities:
+    - MISC: Coslada?
+    - estacion: Coslada
+  - slot_was_set:
+    - estacion: Coslada
+  - action: cita_form
+  - active_loop: cita_form
+  - slot_was_set:
+    - estacion: Coslada
+  - slot_was_set:
+    - estacion: Coslada
+  - slot_was_set:
+    - requested_slot: turno
+  - slot_was_set:
+    - turno: tarde
+  - slot_was_set:
+    - time:
+        to: '2021-09-17T19:00:00.000+02:00'
+        from: '2021-09-17T12:00:00.000+02:00'
+  - slot_was_set:
+    - time:
+        to: '2021-09-17T19:00:00.000+02:00'
+        from: '2021-09-17T12:00:00.000+02:00'
+  - slot_was_set:
+    - turno: tarde
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: utter_submit
+  - action: utter_cita_slot
+  - intent: info_cita
+    entities:
+    - MISC: Coslada?
+    - dia: de
+    - dia: próxima semana
+    - estacion: Coslada
+    - time: '2021-09-20T00:00:00.000+02:00'
+  - slot_was_set:
+    - estacion: Coslada
+  - slot_was_set:
+    - time: '2021-09-20T00:00:00.000+02:00'
+  - action: cita_form
+  - active_loop: cita_form
+  - slot_was_set:
+    - estacion: Coslada
+  - slot_was_set:
+    - turno: tarde
+  - slot_was_set:
+    - time: '2021-09-20T00:00:00.000+02:00'
+  - slot_was_set:
+    - estacion: Coslada
+  - slot_was_set:
+    - time: '2021-09-20T00:00:00.000+02:00'
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: utter_submit
+  - action: utter_cita_slot
+
+- story: interactive_story_1
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: ask_horario
+    entities:
+    - estacion: coslada
+  - slot_was_set:
+    - estacion: coslada
+  - action: horario_form
+  - active_loop: horario_form
+  - slot_was_set:
+    - estacion: coslada
+  - slot_was_set:
+    - estacion: coslada
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: utter_horario_submit
+  - intent: ask_horario
+    entities:
+    - PER: Mostoles
+  - action: horario_form
+  - active_loop: horario_form
+  - slot_was_set:
+    - estacion: coslada
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: utter_horario_submit
+  - intent: ask_horario
+    entities:
+    - estacion: Mostoles
+  - slot_was_set:
+    - estacion: Mostoles
+  - action: horario_form
+  - active_loop: horario_form
+  - slot_was_set:
+    - estacion: Mostoles
+  - slot_was_set:
+    - estacion: Mostoles
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: utter_horario_submit
+  - intent: info_cita
+    entities:
+    - number: 1
+  - action: cita_form
+  - active_loop: cita_form
+  - slot_was_set:
+    - estacion: Mostoles
+  - slot_was_set:
+    - requested_slot: time
+  - slot_was_set:
+    - turno: mañana
+  - slot_was_set:
+    - time: '2021-09-16T00:00:00.000+02:00'
+  - slot_was_set:
+    - turno: mañana
+  - slot_was_set:
+    - time: '2021-09-16T00:00:00.000+02:00'
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: utter_submit
+  - action: utter_cita_slot
+
+- story: Usuario no quiere pedir cita
+  steps:
+    - intent: greet
+    - action: utter_greet
+    - intent: info_cita
+    - action: cita_form
+    - active_loop: cita_form
+    - intent: stop
+    - action: utter_ask_continue
+    - or:
+        - intent: stop
+        - intent: affirm
+    - action: action_deactivate_loop
+    - active_loop: null
+
+- story: Pedir cita interactive 1
+  steps:
+    - intent: greet
+    - action: utter_greet
+    - intent: info_cita
+    - action: cita_form
+    - active_loop: cita_form
+    - slot_was_set:
+      - requested_slot: turno
+    - intent: bot_challenge
+    - action: utter_iamabot
+    - action: cita_form
+    - slot_was_set:
+      - requested_slot: turno
+    - intent: stop
+    - action: utter_ask_continue
+    - or:
+        - intent: stop
+        - intent: affirm
+    - action: action_deactivate_loop
+    - active_loop: null
+    - slot_was_set:
+      - requested_slot: null
+    - intent: goodbye
+    - action: utter_goodbye 
