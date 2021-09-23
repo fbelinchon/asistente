@@ -16,12 +16,10 @@ intents:
 - mood_great
 - mood_unhappy
 - bot_challenge
-- out_of_scope
 - stop
 entities:
 - LOC
 - MISC
-- ORG
 - dia
 - estacion
 - time
