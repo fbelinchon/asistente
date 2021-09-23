@@ -54,15 +54,6 @@ stories:
     entities:
     - LOC: Sevilla
   - action: action_weather
-
-# - story: info_cita_happypath
-#   steps:
-#     - intent: greet
-#     - action: utter_greet
-#     - intent: info_cita
-#     - action: cita_form
-
-
 - story: interactive_story_1
   steps:
   - intent: info_cita
@@ -124,7 +115,6 @@ stories:
   - active_loop: null
   - action: utter_submit
   - action: utter_cita_slot
-
 - story: interactive_story_1
   steps:
   - intent: greet
@@ -192,44 +182,90 @@ stories:
   - active_loop: null
   - action: utter_submit
   - action: utter_cita_slot
-
 - story: Usuario no quiere pedir cita
   steps:
-    - intent: greet
-    - action: utter_greet
-    - intent: info_cita
-    - action: cita_form
-    - active_loop: cita_form
+  - intent: greet
+  - action: utter_greet
+  - intent: info_cita
+  - action: cita_form
+  - active_loop: cita_form
+  - intent: stop
+  - action: utter_ask_continue
+  - or:
     - intent: stop
-    - action: utter_ask_continue
-    - or:
-        - intent: stop
-        - intent: affirm
-    - action: action_deactivate_loop
-    - active_loop: null
-
+    - intent: affirm
+  - action: action_deactivate_loop
+  - active_loop: null
 - story: Pedir cita interactive 1
   steps:
-    - intent: greet
-    - action: utter_greet
-    - intent: info_cita
-    - action: cita_form
-    - active_loop: cita_form
-    - slot_was_set:
-      - requested_slot: turno
-    - intent: bot_challenge
-    - action: utter_iamabot
-    - action: cita_form
-    - slot_was_set:
-      - requested_slot: turno
+  - intent: greet
+  - action: utter_greet
+  - intent: info_cita
+  - action: cita_form
+  - active_loop: cita_form
+  - slot_was_set:
+    - requested_slot: turno
+  - intent: bot_challenge
+  - action: utter_iamabot
+  - action: cita_form
+  - slot_was_set:
+    - requested_slot: turno
+  - intent: stop
+  - action: utter_ask_continue
+  - or:
     - intent: stop
-    - action: utter_ask_continue
-    - or:
-        - intent: stop
-        - intent: affirm
-    - action: action_deactivate_loop
-    - active_loop: null
-    - slot_was_set:
-      - requested_slot: null
-    - intent: goodbye
-    - action: utter_goodbye 
+    - intent: affirm
+  - action: action_deactivate_loop
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - intent: goodbye
+  - action: utter_goodbye
+- story: Story from Conversation ID 9cbf26d1e46f4a63a1e132a0af3c884b
+  steps:
+  - intent: info_cita
+    entities:
+    - PER: Hola
+    - MISC: ITV
+    - number: 1
+  - action: cita_form
+  - active_loop: cita_form
+  - slot_was_set:
+    - requested_slot: estacion
+  - intent: ask_horario
+    entities:
+    - LOC: Villarejo
+    - estacion: Villarejo
+  - slot_was_set:
+    - estacion: Villarejo
+  - action: cita_form
+  - slot_was_set:
+    - estacion: Villarejo
+  - slot_was_set:
+    - requested_slot: time
+  - intent: info_cita
+    entities:
+    - time: de la próxima semana
+    - time: '2021-10-01T00:00:00.000+02:00'
+  - slot_was_set:
+    - time: '2021-10-01T00:00:00.000+02:00'
+  - action: cita_form
+  - slot_was_set:
+    - time:
+      - de la próxima semana
+      - '2021-10-01T00:00:00.000+02:00'
+  - slot_was_set:
+    - requested_slot: turno
+  - intent: info_cita
+    entities:
+    - turno: tarde
+  - slot_was_set:
+    - turno: tarde
+  - action: cita_form
+  - slot_was_set:
+    - turno: tarde
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: utter_submit
+  - action: utter_cita_slot
