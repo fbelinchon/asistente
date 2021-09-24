@@ -3,20 +3,22 @@ session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
 intents:
-- greet
 - info_cita
+- affirm
+- stop
+- greet
 - ask_horario:
     use_entities:
     - estacion
 - ask_weather
 - out-of-scope
 - goodbye
-- affirm
 - deny
 - mood_great
 - mood_unhappy
 - bot_challenge
-- stop
+- change_of_mind
+
 entities:
 - LOC
 - MISC
@@ -24,10 +26,12 @@ entities:
 - estacion
 - time
 - turno
+- cambio
+
 slots:
   estacion:
     type: text
-    influence_conversation: true
+    influence_conversation: false
   turno:
     type: categorical
     influence_conversation: true
@@ -40,6 +44,11 @@ slots:
   requested_slot:
     type: text
     influence_conversation: false
+  cambio:
+    type: text
+    influence_conversation: true
+    initial_value: "no_change"
+
 responses:
   utter_greet:
   - text: ¿Hola. Soy tu asistente virtual para gestionar tu ITV. que necesitas saber?
@@ -67,9 +76,15 @@ responses:
   utter_horario_submit:
   - text: ¿Te ha servido de ayuda?
   utter_ask_continue:
-  - text: "¿está seguro que quiere cancelar el proceso de cita?"
+  - text: ¿está seguro que quiere cancelar el proceso de cita?
+  utter_salir_cita:
+  - text: Lamento oir eso. ¿Puedo ayudarle en algo más?
+  utter_change_of_mind:
+  - text: ¿Qué quieres cambiar, la estación la fecha o el turno?
+
 actions:
 - action_weather
+- utter_ask_continue
 - utter_cita_slot
 - utter_greet
 - utter_horario_submit
@@ -87,6 +102,9 @@ forms:
         type: from_entity
       turno:
       - entity: turno
+        type: from_entity
+      cambio:
+      - entity: cambio
         type: from_entity
   horario_form:
     required_slots:

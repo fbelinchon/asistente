@@ -95,6 +95,26 @@ class ValidateCitaForm(FormValidationAction):
         dispatcher.utter_message(text=f"Perfecto, quieres información para el turno {slot_value}")
         return{"turno": slot_value}
 
+    def validate_cambio(
+        self,
+        slot_value: Any,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: Dict[Text, Any],
+    ) -> Dict[Text,Any]:
+        """Valida cambio"""
+        if slot_value.lower() == 'estacion':
+
+            return {"estacion": None,"time":None,"turno":None,"cambio":"no_change"}
+        elif slot_value.lower() == 'fecha':
+            
+            return {"time":None,"turno":None,"cambio":"no_change"}
+        elif slot_value.lower() == 'turno':    
+            return {"turno":None,"cambio":"no_change"}
+
+        dispatcher.utter_message(text=f"Perfecto, quieres un cambio de {slot_value}")
+        return{}
+
 class ValidateHorarioForm(FormValidationAction):
     def name(self) -> Text:
         return "validate_horario_form"

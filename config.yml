@@ -6,9 +6,9 @@ pipeline:
 # # No configuration for the NLU pipeline was provided. The following default pipeline was used to train your model.
 # # If you'd like to customize it, uncomment and adjust the pipeline.
 # # See https://rasa.com/docs/rasa/tuning-your-model for more information.
-  #  - name: SpacyNLP
-  #    model: "es_core_news_sm"
-  #    case_sensitive: false
+   - name: SpacyNLP
+     model: "es_core_news_sm"
+     case_sensitive: false
    - name: SpacyTokenizer
    - name: SpacyFeaturizer
    - name: RegexFeaturizer
@@ -23,7 +23,7 @@ pipeline:
      constrain_similarities: true
    - name: "DucklingEntityExtractor"
      url: "http://localhost:9000"
-     dimensions: ["time", "number"]
+     dimensions: ["time"]
      locale: "es_ES"
      timezone: "Europe/Madrid"
      timeout : 3

@@ -62,6 +62,20 @@ stories:
 #     - intent: info_cita
 #     - action: cita_form
 
+#     - active_loop: null
+#     - action: utter_submit
+
+- story: info_cita_COM
+  steps:
+    - intent: greet
+    - action: utter_greet
+    - intent: info_cita
+    - action: cita_form
+    - active_loop: cita_form
+    - intent: change_of_mind
+    - action: utter_change_of_mind
+    - active_loop: null
+    - action: utter_submit
 
 - story: interactive_story_1
   steps:
@@ -207,8 +221,9 @@ stories:
         - intent: affirm
     - action: action_deactivate_loop
     - active_loop: null
+    - action: utter_salir_cita
 
-- story: Pedir cita interactive 1
+- story: salir cita 1
   steps:
     - intent: greet
     - action: utter_greet
@@ -231,5 +246,28 @@ stories:
     - active_loop: null
     - slot_was_set:
       - requested_slot: null
+    - action: utter_salir_cita
     - intent: goodbye
     - action: utter_goodbye 
+
+- story: salir cita 2
+  steps:
+  - intent: info_cita
+  - action: cita_form
+  - active_loop: cita_form
+  - slot_was_set:
+    - requested_slot: estacion
+  - slot_was_set:
+    - estacion: Coslada
+  - slot_was_set:
+    - estacion: Coslada
+  - slot_was_set:
+    - requested_slot: time
+  - intent: stop
+  - action: utter_ask_continue
+  - intent: affirm
+  - action: action_deactivate_loop
+  - active_loop: null
+  - action: utter_salir_cita
+  - intent: goodbye
+  - action: utter_goodbye

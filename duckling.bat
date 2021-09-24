@@ -1,0 +1,1 @@
+docker run -p 9000:8000 rasa/duckling:0.1.6.5-r2

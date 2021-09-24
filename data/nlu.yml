@@ -25,7 +25,8 @@ nlu:
     - el viernes por la [tarde](turno)
     - que teneis libre el lunes [de](time) la [próxima semana](time) en [Coslada](estacion)?
     - quiero pedir una cita
-    - [mañana](turno)
+    - quiero una cita
+    - Sobre [Coslada](estacion)
 - intent: greet
   examples: |
     - Hola
@@ -62,6 +63,7 @@ nlu:
     - porqué no.
     - sí claro.
     - si, estoy seguro.
+    - si, seguro
 - intent: deny
   examples: |
     - no
@@ -130,6 +132,9 @@ nlu:
     - no quiero información de la cita
     - esto no me ayuda.
     - no es lo que quiero
+    - no quiero seguir con la cita
+    - ya no quiero seguir con la cita
+    - he cambiado de idea
 - intent: ask_horario
   examples: |
     - que horario tiene [Coslada](estacion)
@@ -150,3 +155,18 @@ nlu:
     - Alcalá
     - Alcala
     - Aranjuez
+- intent: change_of_mind
+  examples: |
+    - He cambiado de idea
+    - quiero cambiar de [estación]{"entity": "cambio", "value": "estacion"}
+    - quiero cambiar de [día]{"entity": "cambio", "value": "fecha"}
+    - quiero cambiar de [fecha](cambio)
+    - quiero cambiar de [turno](cambio).
+    - quiero pasar la ITV en otro [lugar]{"entity": "cambio", "value": "estación"}
+    - quiero cambiar de [ITV]{"entity": "cambio", "value": "estacion"}
+    
+
+- synonym: estacion
+  examples: |
+    - estación
+    - ITV
