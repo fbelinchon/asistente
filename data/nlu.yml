@@ -25,8 +25,9 @@ nlu:
     - el viernes por la [tarde](turno)
     - que teneis libre el lunes [de](time) la [próxima semana](time) en [Coslada](estacion)?
     - quiero pedir una cita
-    - quiero una cita
-    - Sobre [Coslada](estacion)
+    - quiero pedir una cita para [Coslada](estacion)
+    - cita para [Coslada](estacion)
+    - para [mañana](time) por [tarde](turno)
 - intent: greet
   examples: |
     - Hola
@@ -127,7 +128,6 @@ nlu:
     - ¿Eres un robot?
 - intent: stop
   examples: |
-    - he cambiado de idea
     - no es esto lo que quiero
     - no quiero información de la cita
     - esto no me ayuda.

@@ -86,6 +86,8 @@ stories:
   - slot_was_set:
     - estacion: Coslada
   - action: cita_form
+  - slot_was_set:
+    - cambio: no_change
   - active_loop: cita_form
   - slot_was_set:
     - estacion: Coslada
@@ -138,7 +140,6 @@ stories:
   - active_loop: null
   - action: utter_submit
   - action: utter_cita_slot
-
 - story: interactive_story_1
   steps:
   - intent: greet
@@ -206,68 +207,47 @@ stories:
   - active_loop: null
   - action: utter_submit
   - action: utter_cita_slot
-
 - story: Usuario no quiere pedir cita
   steps:
-    - intent: greet
-    - action: utter_greet
-    - intent: info_cita
-    - action: cita_form
-    - active_loop: cita_form
-    - intent: stop
-    - action: utter_ask_continue
-    - or:
-        - intent: stop
-        - intent: affirm
-    - action: action_deactivate_loop
-    - active_loop: null
-    - action: utter_salir_cita
-
-- story: salir cita 1
-  steps:
-    - intent: greet
-    - action: utter_greet
-    - intent: info_cita
-    - action: cita_form
-    - active_loop: cita_form
-    - slot_was_set:
-      - requested_slot: turno
-    - intent: bot_challenge
-    - action: utter_iamabot
-    - action: cita_form
-    - slot_was_set:
-      - requested_slot: turno
-    - intent: stop
-    - action: utter_ask_continue
-    - or:
-        - intent: stop
-        - intent: affirm
-    - action: action_deactivate_loop
-    - active_loop: null
-    - slot_was_set:
-      - requested_slot: null
-    - action: utter_salir_cita
-    - intent: goodbye
-    - action: utter_goodbye 
-
-- story: salir cita 2
-  steps:
+  - intent: greet
+  - action: utter_greet
   - intent: info_cita
   - action: cita_form
   - active_loop: cita_form
-  - slot_was_set:
-    - requested_slot: estacion
-  - slot_was_set:
-    - estacion: Coslada
-  - slot_was_set:
-    - estacion: Coslada
-  - slot_was_set:
-    - requested_slot: time
   - intent: stop
   - action: utter_ask_continue
-  - intent: affirm
+  - or:
+      - intent: stop
+      - intent: affirm
   - action: action_deactivate_loop
   - active_loop: null
   - action: utter_salir_cita
+
+- story: salir cita 1
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: info_cita
+  - action: cita_form
+  - slot_was_set:
+    - cambio: no_change
+  - active_loop: cita_form
+  - slot_was_set:
+    - requested_slot: turno
+  - intent: bot_challenge
+  - action: utter_iamabot
+  - action: cita_form
+  - slot_was_set:
+    - requested_slot: turno
+  - intent: stop
+  - action: utter_ask_continue
+  - or:
+      - intent: stop
+      - intent: affirm
+  - action: action_deactivate_loop
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - action: utter_salir_cita
   - intent: goodbye
-  - action: utter_goodbye
+  - action: utter_goodbye 

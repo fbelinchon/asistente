@@ -56,3 +56,10 @@ rules:
   - active_loop: null
   - action: utter_horario_submit
 
+- rule: CofM info cita
+  condition:
+  - active_loop: horario_form
+  steps:
+  - intent: change_of_mind
+  - action: utter_change_of_mind
+

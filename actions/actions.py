@@ -15,6 +15,9 @@ from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.events import SlotSet
 import requests
 
+from datetime import date
+import locale
+
 
 key='3df4137afb5038ed8b916a7cff9e76bd'
 api_address='https://api.openweathermap.org/data/2.5/weather?q=ciudad&lang=es&units=metric&appid='+key
@@ -24,7 +27,7 @@ ESTACIONES = ["coslada","móstoles","mostoles","villarejo","alcalá","alcala","a
 
 class ActionHelloWorld(Action):
 
-    
+    locale.setlocale(locale.LC_ALL, 'es_ES')
 
     def name(self) -> Text:
         return "action_weather"
@@ -56,6 +59,7 @@ class ActionHelloWorld(Action):
         return temperature,desc
 
 class ValidateCitaForm(FormValidationAction):
+    locale.setlocale(locale.LC_ALL, 'es_ES')
     def name(self) -> Text:
         return "validate_cita_form"
     def validate_estacion(
@@ -69,10 +73,8 @@ class ValidateCitaForm(FormValidationAction):
         if slot_value.lower() not in ESTACIONES:
             dispatcher.utter_message(text=f"{slot_value.lower()} no es una estación conocida")
             return {"estacion": None}
-        else:
-            dispatcher.utter_message(text=f"Perfecto, quieres información para la estación de {slot_value}")
-            return{"estacion": slot_value}
-
+        return {"estacion": slot_value}
+        
     def validate_time(
         self,
         slot_value: Any,
@@ -81,7 +83,9 @@ class ValidateCitaForm(FormValidationAction):
         domain: Dict[Text, Any],
     ) -> Dict[Text,Any]:
         """Valida time"""
-        dispatcher.utter_message(text=f"Perfecto, quieres información para el día {slot_value}")
+        print(slot_value)
+        day=date.fromisoformat(str(slot_value[1])[0:10])
+        dispatcher.utter_message(text=f"el {day.strftime('%A, 18 de %B de %Y')}")
         return{"time": slot_value}
 
     def validate_turno(
@@ -103,6 +107,8 @@ class ValidateCitaForm(FormValidationAction):
         domain: Dict[Text, Any],
     ) -> Dict[Text,Any]:
         """Valida cambio"""
+
+        
         if slot_value.lower() == 'estacion':
 
             return {"estacion": None,"time":None,"turno":None,"cambio":"no_change"}
@@ -111,6 +117,8 @@ class ValidateCitaForm(FormValidationAction):
             return {"time":None,"turno":None,"cambio":"no_change"}
         elif slot_value.lower() == 'turno':    
             return {"turno":None,"cambio":"no_change"}
+        elif slot_value.lower() == 'no_change':
+            return{}
 
         dispatcher.utter_message(text=f"Perfecto, quieres un cambio de {slot_value}")
         return{}
